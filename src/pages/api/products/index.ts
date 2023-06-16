@@ -1,24 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import connectDB from '../utils/connectDB';
 import * as services from '../services/product';
-
-type Data = {
-  products: {}[]
-  errorMessage: string | null
-}
+import { ApiProductResponse } from '@/interfaces/Response';
+import { Product } from '@/interfaces/Product';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<ApiProductResponse>
 ) {
   try {
     const connection = await connectDB();
     if (connection) {
       try {
-        const products: {}[] = await services.getAll();
+        const products: Product[] = await services.getAll();
         return res.status(200)
-          .json({ errorMessage: null, products });
-
+          .json({ error: null, products });
       } catch (err) {
         throw new Error;
       }
@@ -26,6 +22,9 @@ export default async function handler(
 
   } catch (err) {
     return res.status(500)
-      .json({ errorMessage: "Internal server error", products: [] });
+      .json({
+        error: { message: "Internal server error", status: 500 },
+        products: []
+      });
   }
 }
