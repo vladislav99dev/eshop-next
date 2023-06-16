@@ -1,6 +1,6 @@
 import React from 'react'
 import { useModalContext } from '@/context/ModalContext'
-import { CloseIcon, BigCloseIcon } from "@/assets/icons/icons"
+import { CloseIcon, BigCloseIcon, BigSuccessIcon } from "@/assets/icons/icons"
 
 const Modal = () => {
     const { state, resetModal } = useModalContext();
@@ -9,9 +9,11 @@ const Modal = () => {
             ?.parentElement?.classList.remove('!translate-x-[-50%]');
         setTimeout(() => {
             resetModal()
-        }, 200)
+        }, 400)
     }
-    const btnStyles = 'bg-red-400 rounded-2xl py-2 px-12 text-base text-white font-semibold'
+    const color = `${state.modalState === 'success' ? 'bg-green-400' : 'bg-red-400'}`
+    const btnStyles = `rounded-2xl py-2 px-12 text-base text-white font-semibold ${color}`
+
     return (
         <div className={`h-[400px] w-[350px]
         sm:h-[400px] sm:w-[400px]
@@ -24,21 +26,26 @@ const Modal = () => {
         transition ease-in-out duration-700
          ${state.modalState !== 'none' && '!translate-x-[-50%]'}
         `}>
-            <div className='flex flex-col w-full bg-red-400 pt-4 pb-6 rounded-t-md'>
+            <div className={`flex flex-col w-full pt-4 pb-6 rounded-t-md ${color}`}>
                 <div onClick={closeModal} className='self-end px-4 cursor-pointer'>
                     <CloseIcon />
                 </div>
                 <div className='self-center'>
-                    <BigCloseIcon />
+                    {state.modalState === "failed" &&
+                        <BigCloseIcon />
+                    }
+                    {state.modalState === "success" &&
+                        <BigSuccessIcon />
+                    }
                 </div>
             </div>
             <div className='flex flex-col justify-center items-center my-6 gap-y-4'>
-                {state.modalState === 'failed' && (
-                    <div className='flex justify-center items-center gap-x-2 text-4xl font-semibold text-gray-700'>
+                <div className='flex justify-center items-center gap-x-2 text-4xl font-semibold text-gray-700'>
+                    {state.modalState === "failed" &&
                         <p className=''>Ooops!</p>
-                        <p>{state.status}</p>
-                    </div>
-                )}
+                    }
+                    <p>{state.status}</p>
+                </div>
                 <h3 className='text-2xl'>{state.message}</h3>
 
             </div>
