@@ -5,7 +5,6 @@ import type { AppProps } from "next/app";
 
 interface Props {
     children: JSX.Element | JSX.Element[];
-    name: string
 }
 
 const Layout = ({ children }: Props) => {
