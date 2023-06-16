@@ -17,8 +17,8 @@ const initialState: Modal = {
     message: "",
     status: 0,
     modalState: "none",
-    cancelHandler: () => { },
-    continueHandler: () => { },
+    buttonHandler: () => { },
+    buttonText: "",
 }
 
 type Props = {
@@ -26,17 +26,18 @@ type Props = {
 }
 
 const reducerFn = (state: Modal, action: Action) => {
-    const { message, status, modalState, cancelHandler, continueHandler }
+    const { message, status, modalState, buttonHandler, buttonText }
         = action.payload;
 
     switch (action.type) {
-        case "success" || "failed" || "none":
+        case "success":
+        case "failed":
             return {
                 message: message,
                 status: status,
                 modalState: modalState,
-                cancelHandler: cancelHandler,
-                continueHandler: continueHandler
+                buttonHandler: buttonHandler,
+                buttonText: buttonText
             }
         default:
             return initialState
@@ -58,10 +59,10 @@ export const ModalContextWrapper = ({ children }: Props) => {
         dispatch({ type: "success", payload: data })
     }
     const setFailed = (data: Modal) => {
-        dispatch({ type: "success", payload: data })
+        dispatch({ type: "failed", payload: data })
     }
     const resetModal = () => {
-        dispatch({ type: "resetModal", payload: initialState })
+        dispatch({ type: "", payload: initialState })
     }
 
     return (

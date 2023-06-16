@@ -22,12 +22,10 @@ function setError(message: string, status: number): Modal {
         message: message,
         status: status,
         modalState: "failed",
-        cancelHandler: () => {
+        buttonHandler: () => {
             console.log("oh shit")
         },
-        continueHandler: () => {
-            console.log("oh shit")
-        }
+        buttonText: "Try Again"
     }
     return errData
 }
