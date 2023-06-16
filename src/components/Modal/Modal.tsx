@@ -6,7 +6,7 @@ const Modal = () => {
     const { state, resetModal } = useModalContext();
     const closeModal = (e: React.MouseEvent) => {
         e.currentTarget.parentElement
-            ?.parentElement?.classList.remove('!translate-x-[-50%]');
+            ?.parentElement?.classList.remove('!left-[50%]');
         setTimeout(() => {
             resetModal()
         }, 400)
@@ -18,13 +18,13 @@ const Modal = () => {
         <div className={`h-[400px] w-[350px]
         sm:h-[400px] sm:w-[400px]
         md:h-[400px] md:w-[600px] 
-        top-[50vh] left-[50%]
-        absolute  translate-y-[-50%] translate-x-[-100vw]
+        top-[50vh]   -left-[100%]
+        absolute  translate-y-[-50%]  translate-x-[-50%]
         flex flex-col items-center
         rounded-md
         shadow-2xl
-        transition ease-in-out duration-700
-         ${state.modalState !== 'none' && '!translate-x-[-50%]'}
+        transition-all ease-in-out duration-[1200ms]
+         ${state.modalState !== 'none' && '!left-[50%]'}
         `}>
             <div className={`flex flex-col w-full pt-4 pb-6 rounded-t-md ${color}`}>
                 <div onClick={closeModal} className='self-end px-4 cursor-pointer'>
