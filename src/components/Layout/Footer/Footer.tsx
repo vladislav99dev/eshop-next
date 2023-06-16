@@ -1,6 +1,6 @@
 const Footer = () => {
     return (
-        <ul>
+        <ul className="">
             <li>Orders</li>
             <li>Men</li>
             <li>Women</li>

@@ -13,7 +13,9 @@ const Layout = ({ children }: Props) => {
         <div className="">
             <Header />
             <Modal />
-            {children}
+            <div className="min-h-[64vh]">
+                {children}
+            </div>
             <Footer />
         </div>
     )
