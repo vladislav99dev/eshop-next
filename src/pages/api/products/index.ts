@@ -13,9 +13,8 @@ export default async function handler(
     if (connection) {
       try {
         const products: Product[] = await services.getAll();
-        throw {}
-        // return res.status(200)
-        //   .json({ error: null, products });
+        return res.status(200)
+          .json({ error: null, products });
       } catch (err) {
         throw new Error;
       }
