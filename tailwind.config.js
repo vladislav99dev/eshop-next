@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
+      fontFamily: {
+        dynaPuff: ["var(--font-dynaPuff)"],
+      },
       colors: {
         "primary-100": "#00df9a",
         "primary-dark-100": "#00c98b",
