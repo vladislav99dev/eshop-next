@@ -114,7 +114,7 @@ const Header = () => {
                 </div>
             </div>
 
-            <UserLinks ref={userLinks} />
+            <UserLinks ref={userLinks} isUserLinksOpen={headertState.isUserLinksOpen} />
         </nav>
     )
 }
