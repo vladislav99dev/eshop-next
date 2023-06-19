@@ -1,4 +1,4 @@
-import { useRef, useState, createRef, useReducer } from "react";
+import { createRef, useReducer } from "react";
 import { HearthIcon, MenuIcon, CartIcon, UserPlusIcon, UserMinusIcon, MenuCloseIcon } from "@/assets/icons/icons";
 
 import { Action } from "@/interfaces/Action";
