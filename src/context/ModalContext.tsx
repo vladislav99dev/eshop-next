@@ -1,8 +1,8 @@
 import { createContext, useContext, useReducer } from "react";
 import { Modal } from "@/interfaces/Modal";
+import { Action } from "@/interfaces/Action";
 
-interface Action {
-    type: string,
+interface ModalAction extends Action {
     payload: Modal
 }
 
@@ -25,7 +25,7 @@ type Props = {
     children: JSX.Element | JSX.Element[]
 }
 
-const reducerFn = (state: Modal, action: Action) => {
+const reducerFn = (state: Modal, action: ModalAction) => {
     const { message, status, modalState, buttonHandler, buttonText }
         = action.payload;
 
