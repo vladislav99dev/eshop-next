@@ -80,7 +80,7 @@ const Header = () => {
                 isMobileNavigation={true}
                 isMobileMenuOpen={headertState.isMobileMenuOpen}
             />
-            <NavLinks ref={mobileNavLinks} isMobileNavigation={false} isMobileMenuOpen={null} />
+            <NavLinks ref={mobileNavLinks} isMobileNavigation={false} isMobileMenuOpen={false} />
 
 
             <div className="flex items-center gap-x-4 mr-4">
