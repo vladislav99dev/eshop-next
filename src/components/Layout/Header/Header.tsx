@@ -5,10 +5,6 @@ import { Action } from "@/interfaces/Action";
 import NavLinks from "./NavLinks";
 import UserLinks from "./UserLinks";
 
-interface HeaderAction extends Action {
-    payload: HeaderState
-}
-
 interface HeaderState {
     isCartOpen: boolean,
     isFavouritesOpen: boolean,
@@ -23,14 +19,27 @@ const initialState: HeaderState = {
     isMobileMenuOpen: false,
 }
 
-const reducerFn = (state: HeaderState, action: HeaderAction) => {
+const reducerFn = (state: HeaderState, action: Action) => {
     switch (action.type) {
         case "cart":
+            return {
+                ...initialState,
+                isCartOpen: !state.isCartOpen,
+            }
         case "favourites":
+            return {
+                ...initialState,
+                isFavouritesOpen: !state.isFavouritesOpen,
+            }
         case "user":
+            return {
+                ...initialState,
+                isUserLinksOpen: !state.isUserLinksOpen,
+            }
         case "mobileMenu":
             return {
-                ...action.payload
+                ...initialState,
+                isMobileMenuOpen: !state.isMobileMenuOpen,
             }
         default:
             return initialState
@@ -43,52 +52,20 @@ const Header = () => {
     const mobileNavLinks = createRef<HTMLDivElement>()
     const userLinks = createRef<HTMLDivElement>()
 
-    const removeStyles = () => {
-        mobileNavLinks.current?.classList.remove('!top-[80px]')
-    }
-
     const openCart = () => {
-        removeStyles()
-        headerReducer({ type: 'cart', payload: { ...initialState, isCartOpen: true } })
+        headerReducer({ type: 'cart' })
     }
     const openFavourites = () => {
-        removeStyles()
-        headerReducer({ type: 'favourites', payload: { ...initialState, isFavouritesOpen: true } })
+        headerReducer({ type: 'favourites' })
     }
     const openUserLinks = () => {
-        removeStyles()
-        headerReducer({ type: 'user', payload: { ...initialState, isUserLinksOpen: true } })
+        headerReducer({ type: 'user' })
     }
     const openMobileLinks = () => {
-        removeStyles()
-        headerReducer({ type: 'mobileMenu', payload: { ...initialState, isMobileMenuOpen: true } })
+        headerReducer({ type: 'mobileMenu' })
     }
     const closeAll = () => {
-        removeStyles()
-        headerReducer({ type: '', payload: { ...initialState } })
-    }
-
-    const mobileLinksStyle = 'bg-primary-dark-800 w-full flex flex-col items-center gap-y-6 left-0 absolute top-[-100%] transition-all ease-in-out duration-[400ms] lg:hidden py-6 text-xl text-white'
-    const desktopLinksStyle = 'hidden lg:flex gap-x-6 items-center text-white text-2xl'
-
-    const mobileMenuHandler = (): void => {
-        if (headertState.isMobileMenuOpen) {
-            closeAll()
-            mobileNavLinks.current?.classList.remove('!top-[80px]')
-        }
-        if (!headertState.isMobileMenuOpen) {
-            openMobileLinks()
-            mobileNavLinks.current?.classList.add('!top-[80px]')
-        }
-    }
-
-    const userLinksHandler = (): void => {
-        if (headertState.isUserLinksOpen) {
-            closeAll()
-        }
-        if (!headertState.isUserLinksOpen) {
-            openUserLinks()
-        }
+        headerReducer({ type: '' })
     }
 
     return (
@@ -98,18 +75,22 @@ const Header = () => {
 
             </div>
 
-            <NavLinks ref={mobileNavLinks} styles={mobileLinksStyle} />
-            <NavLinks ref={null} styles={desktopLinksStyle} />
+            <NavLinks
+                ref={mobileNavLinks}
+                isMobileNavigation={true}
+                isMobileMenuOpen={headertState.isMobileMenuOpen}
+            />
+            <NavLinks ref={mobileNavLinks} isMobileNavigation={false} isMobileMenuOpen={null} />
 
 
             <div className="flex items-center gap-x-4 mr-4">
                 <HearthIcon />
                 <CartIcon />
-                <div onClick={userLinksHandler}>
+                <div onClick={openUserLinks}>
                     {headertState.isUserLinksOpen ? <UserMinusIcon /> : <UserPlusIcon />}
 
                 </div>
-                <div onClick={mobileMenuHandler} className="lg:hidden cursor-pointer">
+                <div onClick={openMobileLinks} className="lg:hidden cursor-pointer">
                     {headertState.isMobileMenuOpen ? <MenuCloseIcon /> : <MenuIcon />}
                 </div>
             </div>
