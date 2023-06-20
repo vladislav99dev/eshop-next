@@ -86,7 +86,7 @@ const Header = () => {
             <div className="flex items-center gap-x-4 mr-4">
                 <HearthIcon />
                 <CartIcon />
-                <div onClick={openUserLinks}>
+                <div onClick={openUserLinks} className="cursor-pointer">
                     {headertState.isUserLinksOpen ? <UserMinusIcon /> : <UserPlusIcon />}
 
                 </div>

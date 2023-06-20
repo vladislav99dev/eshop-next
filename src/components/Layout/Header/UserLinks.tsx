@@ -9,8 +9,8 @@ const UserLinks = forwardRef((props: { isUserLinksOpen: boolean }, ref: Ref<HTML
         ${props.isUserLinksOpen ? 'top-[80px]' : 'top-[-100%]'}
         bg-primary-dark-800
         `}>
-            <Link href={"#"}>Register</Link>
-            <Link href={"#"}>Login</Link>
+            <Link href={""}>Register</Link>
+            <Link href={"/users/login"}>Login</Link>
         </div>
     )
 })
