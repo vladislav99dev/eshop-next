@@ -69,7 +69,7 @@ const Header = () => {
     }
 
     return (
-        <nav className="flex justify-between items-center bg-primary-dark-800 h-[80px] p-4">
+        <nav className="flex justify-between items-center bg-primary-dark-800 h-20 p-4">
             {/* WebsiteIcon */}
             <div className="w-[150px]">
 

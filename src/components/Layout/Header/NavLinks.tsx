@@ -7,15 +7,14 @@ const NavLinks = forwardRef((props: {
 }, ref: Ref<HTMLDivElement>) => {
 
     const mobileLinksStyle = `${props.isMobileMenuOpen ? 'top-[80px]' : 'top-[-100%]'} 
-    bg-primary-dark-800 w-full flex flex-col items-center gap-y-6 left-0 absolute 
-    top-[-100%] transition-all ease-in-out duration-[400ms] lg:hidden py-6 text-xl text-white`
+    bg-primary-dark-800 w-full flex flex-col items-center gap-y-6 left-0 absolute -z-10
+    top-[-100%] transition-all ease-in-out duration-500 lg:hidden py-6 text-xl text-white`
 
     const desktopLinksStyle = 'hidden lg:flex gap-x-6 items-center text-white text-2xl'
 
 
     return (
         <div ref={ref} className={`${props.isMobileNavigation ? mobileLinksStyle : desktopLinksStyle} font-dynaPuff`}>
-            <Link href={"#"}>Orders</Link>
             <Link href={"#"}>Men</Link>
             <Link href={"#"}>Women</Link>
             <Link href={"#"}>Boys</Link>
